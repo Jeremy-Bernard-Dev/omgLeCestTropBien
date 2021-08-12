@@ -3,6 +3,8 @@
 enum{HAUT,BAS,GAUCHE,DROITE};
 int directionH = DROITE;
 int directionV = BAS;
+int scoreP1 = 0;
+int scoreP2 = 0;
 
 void initPlayerSprites(SDL_Renderer *screen)
 {
@@ -81,6 +83,14 @@ void resetBall() {
     }
 }
 
+int getPoint(int player) {
+    if (player == 1) {
+        return scoreP1;
+    } else {
+        return scoreP2;
+    }
+}
+
 void moveBalle() {
     SDL_Rect *position = &BallPos;
     SDL_Rect *p1pos = &P1Pos;
@@ -92,6 +102,7 @@ void moveBalle() {
             position->x +=3;
         } else {
             resetBall();
+            scoreP1 ++;
         }
         if (position->x >= p2pos->x - 10) {
             if (position->y >= p2pos->y - 20 && position->y <= p2pos->y + 99) {
@@ -105,6 +116,7 @@ void moveBalle() {
                 position->x -=3;
             } else {
                 resetBall();
+                scoreP2 ++;
             }
             if (position->x <= p1pos->x + 10) {
                 if (position->y >= p1pos->y - 20 && position->y <= p1pos->y + 99) {

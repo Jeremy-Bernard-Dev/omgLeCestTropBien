@@ -31,6 +31,11 @@ void drawMenu()
     SDL_RenderPresent(screenRender);
 }
 
+void endGame() {
+    clear();
+    SDL_Quit();
+}
+
 void clear()
 {
     clearPlayer();

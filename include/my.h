@@ -36,5 +36,7 @@ void clearPlayer();
 void clearScreen();
 int client(int Port, char *Ip);
 int serveur(int Port);
+void endGame();
+int getPoint(int player);
 
 #endif

@@ -88,9 +88,13 @@ int game(int idpPlayer) {
             moveBalle();
         }
         draw(2);
+        int point1 = getPoint(1);
+        int point2 = getPoint(2);
+        if (point1 == 3 || point2 == 3) {
+            endGame();
+        }
     }
-    clear();
-    SDL_Quit();
+    endGame();
 
     return 0;
 }
