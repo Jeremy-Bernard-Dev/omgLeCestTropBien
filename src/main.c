@@ -52,18 +52,18 @@ int main() {
 
 int game(int idpPlayer, SOCKET socket) {
     bool quit = false;
-    // bool first = true;
+    bool first = true;
     int timer = 0;
     // char buffer[32] = "OK \n";
     char rbuff[32];
 
     while (!quit)
     {
-        // if (first == true)
-        // {
-        //     send(socket, "ok", 32, 0);
-        //     // first = false;
-        // }
+        if (first == true)
+        {
+            send(socket, "ok", 32, 0);
+            // first = false;
+        }
         while (SDL_PollEvent(&event)) {
             switch (event.type)
             {

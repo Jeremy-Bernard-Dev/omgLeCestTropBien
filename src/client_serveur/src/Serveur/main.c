@@ -65,7 +65,7 @@ int serveur(int Port)
                             close(csock1);
                             csock1 = -1;
                         }
-                    } 
+                    }
                     // else if (FD_ISSET(csock2, &readfs))
                     // {
                     //     puts("C2 co cl \n");
