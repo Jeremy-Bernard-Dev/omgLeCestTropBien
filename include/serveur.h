@@ -19,5 +19,6 @@ typedef struct sockaddr_in SOCKADDR_IN;
 typedef struct sockaddr SOCKADDR;
 
 int readClient(int client, int readClient);
+int game(int idpPlayer, SOCKET socket);
 
 #endif

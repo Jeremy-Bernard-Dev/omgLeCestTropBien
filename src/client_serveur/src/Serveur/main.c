@@ -7,13 +7,11 @@ int serveur(int Port)
     // ADRESSAGE SERVEUR
     SOCKADDR_IN sin;
     SOCKET sock;
-    // socklen_t recsize = sizeof(sin);
     
     // ADRESSAGE CLIENT
     SOCKADDR_IN csin;
     SOCKET csock1;
-    SOCKET csock2;
-    // socklen_t crecsize = sizeof(csin);
+    // SOCKET csock2;
     socklen_t client_addr_len;
 
     //
@@ -39,9 +37,10 @@ int serveur(int Port)
             puts("Wait cl \n");
 
                 csock1 = accept(sock, (SOCKADDR*)&csin, &client_addr_len);
-                csock2 = accept(sock, (SOCKADDR*)&csin, &client_addr_len);
+                // csock2 = accept(sock, (SOCKADDR*)&csin, &client_addr_len);
 
-                if (csock1 < 0 || csock2 < 0)
+                // if (csock1 < 0 || csock2 < 0)
+                if (csock1 < 0)
                 {
                     return  1;
                 }
@@ -53,29 +52,33 @@ int serveur(int Port)
                     FD_ZERO(&readfs);
 
                     FD_SET(csock1, &readfs);
-                    FD_SET(csock2, &readfs);
+                    // FD_SET(csock2, &readfs);
 
-                    select(csock2 + 1, &readfs, NULL, NULL, NULL);
+                    // select(csock2 + 1, &readfs, NULL, NULL, NULL);
 
                     if (FD_ISSET(csock1, &readfs))
                     {
+                        puts("C1 co cl \n");
                         if (readClient(csock1, playernbr) == -1)
                         {
                             puts("c1 dis \n");
                             close(csock1);
                             csock1 = -1;
                         }
-                    } else if (FD_ISSET(csock2, &readfs))
-                    {
-                        if (readClient(csock2 ,playernbr) == -1)
-                        {
-                            puts("c2 dis \n");
-                            close(csock2);
-                            csock2 = -1;
-                        }
-                    }
+                    } 
+                    // else if (FD_ISSET(csock2, &readfs))
+                    // {
+                    //     puts("C2 co cl \n");
+                    //     if (readClient(csock2 ,playernbr) == -1)
+                    //     {
+                    //         puts("c2 dis \n");
+                    //         close(csock2);
+                    //         csock2 = -1;
+                    //     }
+                    // }
 
-                    if (csock1 == -1 && csock2 == -1)
+                    // if (csock1 == -1 && csock2 == -1)
+                    if (csock1 == -1)
                     {
                         break;
                     }

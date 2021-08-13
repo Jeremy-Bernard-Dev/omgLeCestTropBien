@@ -9,6 +9,12 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+#define SOCKET_ERROR -1
 
 #define LARGEUR_TILE 24  // hauteur et largeur des tiles.
 #define HAUTEUR_TILE 24 
@@ -17,11 +23,12 @@
 #define NOMBRE_BLOCS_HAUTEUR 13
 
 enum{HAUT,BAS,GAUCHE,DROITE};
+typedef int SOCKET;
 
 void init();
 void draw(int playernbr);
 void drawMenu();
-int game(int idpPlayer);
+int game(int idpPlayer, SOCKET socket);
 void clear();
 void Createwindow();
 SDL_Renderer *getscreen();
