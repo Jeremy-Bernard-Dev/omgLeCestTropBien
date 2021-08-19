@@ -40,7 +40,7 @@ int serveur(int Port)
                 {
                     return  1;
                 }
-                puts("Connect \n");
+                puts("Connecté \n");
                 playernbr++;
 
                 while (1)
