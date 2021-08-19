@@ -5,8 +5,7 @@ int client(int Port, char *Ip)
 {
     SOCKET sock;
     SOCKADDR_IN sin;
-    char buffer[32] = "OK \n";
-    // char rbuff[32];
+    char buffer[32] = "Connect \n";
     bool gametrue = false;
 
     // CREATE SOCK
@@ -17,28 +16,17 @@ int client(int Port, char *Ip)
     sin.sin_family = AF_INET;
     sin.sin_port = htons(Port);
 
-    // while(connect(sock, (SOCKADDR*)&sin, sizeof(sin)) != SOCKET_ERROR)
+    // SI CONNECTION AU SERVEUR
     if(connect(sock, (SOCKADDR*)&sin, sizeof(sin)) != SOCKET_ERROR)
     {
         send(sock, buffer, 32, 0);
 
         if (gametrue == false) {
-            printf("ok2");
             intBallDir(2); 
             game(1, sock);
             gametrue = true;
         }
-        // while (1) {
-        // if(recv(sock, rbuff, 32, 0) != SOCKET_ERROR)
-        // {
-        //     puts(rbuff);
-        //     puts("ok");
-        //     // game(atoi(rbuff));
-        // }
-        // }
     }
-
-    getchar();
  
     return EXIT_SUCCESS;
 }

@@ -9,6 +9,7 @@ int main() {
     char *clients = "127.0.0.1";
     bool Menu = true;
     SDL_Event event;
+
     // Initilisation des ressources
     init();
  
@@ -23,19 +24,13 @@ int main() {
                 case SDLK_KP_1 :
                 printf("Trying to host\n");
                 serveur(port);
-                printf("Host ok");
-                // Client(port, clients);
-
-                // Game(1,1);
                 Menu = false;
-                // Game(1);
                 break;
 
                 case SDLK_KP_2 :
                 printf("Trying to join the game\n");
                 client(port, clients);
                 Menu = false;
-                // Game(1);
                 break;
 
                 case SDLK_KP_3 :
@@ -53,7 +48,6 @@ int game(int idpPlayer, SOCKET socket) {
     bool quit = false;
     bool first = true;
     int timer = 0;
-    // char buffer[32] = "OK \n";
     char rbuff[32];
     bool game = true;
 
@@ -62,7 +56,6 @@ int game(int idpPlayer, SOCKET socket) {
         if (first == true)
         {
             send(socket, "N", 32, 0);
-            // first = false;
         }
         while (SDL_PollEvent(&event)) {
             switch (event.type)

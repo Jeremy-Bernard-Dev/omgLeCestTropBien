@@ -34,6 +34,7 @@ void initPlayerSprites(SDL_Renderer *screen)
     BallPos.h = 20;
 }
 
+// Donner la direction de la balle au début de partie
 void intBallDir(int player)
 {
     if (player == 1) {
@@ -86,6 +87,7 @@ void move(int player, int direction) {
         break;
     }
 }
+
 // Réinitialiser la position de la balle au milieu de l'écran
 void resetBall() {
     SDL_Rect *position = &BallPos;
@@ -98,6 +100,7 @@ void resetBall() {
     }
 }
 
+// Obtenir le nombre de point du joueur
 int getPoint(int player) {
     if (player == 1) {
         return scoreP1;
@@ -162,6 +165,7 @@ void moveBalle() {
     }
 }
 
+// Clear texture des joueur + balle
 void clearPlayer()
 {
     SDL_DestroyTexture(player1texture);

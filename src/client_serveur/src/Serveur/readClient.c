@@ -8,7 +8,6 @@ int readClient(int client, int playernbr)
     char str[10];
     int gametrue = 1;
     sprintf(str, "%d", i) ;
-    printf("%d", playernbr);
 
     if (client == -1) {
         return 1;

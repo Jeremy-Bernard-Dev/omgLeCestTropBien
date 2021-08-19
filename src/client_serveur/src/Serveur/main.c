@@ -11,14 +11,12 @@ int serveur(int Port)
     // ADRESSAGE CLIENT
     SOCKADDR_IN csin;
     SOCKET csock1;
+
     // SOCKET csock2;
     socklen_t client_addr_len;
 
     //
     fd_set readfs;
-
-    // char Buffer[32] = "OK";
-    // char buffer[32] = "";
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock != INVALID_SOCKET)
@@ -34,17 +32,15 @@ int serveur(int Port)
         }
 
             listen(sock, 5);
-            puts("Wait cl \n");
+            puts("Attente client \n");
 
                 csock1 = accept(sock, (SOCKADDR*)&csin, &client_addr_len);
-                // csock2 = accept(sock, (SOCKADDR*)&csin, &client_addr_len);
 
-                // if (csock1 < 0 || csock2 < 0)
                 if (csock1 < 0)
                 {
                     return  1;
                 }
-                puts("connect \n");
+                puts("Connect \n");
                 playernbr++;
 
                 while (1)
@@ -52,45 +48,29 @@ int serveur(int Port)
                     FD_ZERO(&readfs);
 
                     FD_SET(csock1, &readfs);
-                    // FD_SET(csock2, &readfs);
-
-                    // select(csock2 + 1, &readfs, NULL, NULL, NULL);
 
                     if (FD_ISSET(csock1, &readfs))
                     {
-                        puts("C1 co cl \n");
+                        puts("C1 connecté \n");
                         if (readClient(csock1, playernbr) == -1)
                         {
-                            puts("c1 dis \n");
+                            puts("c1 déconnecté \n");
                             close(csock1);
                             csock1 = -1;
                         }
                     }
-                    // else if (FD_ISSET(csock2, &readfs))
-                    // {
-                    //     puts("C2 co cl \n");
-                    //     if (readClient(csock2 ,playernbr) == -1)
-                    //     {
-                    //         puts("c2 dis \n");
-                    //         close(csock2);
-                    //         csock2 = -1;
-                    //     }
-                    // }
 
-                    // if (csock1 == -1 && csock2 == -1)
                     if (csock1 == -1)
                     {
                         break;
                     }
-                    puts("search \n");
+                    puts("Recherche du client \n");
                 }
         
         // CLOSE
-        // closesocket(csock);
-        // closesocket(sock);
+        closesocket(csock1);
+        closesocket(sock);
     }
-    
-    getchar();
-    
+        
     return EXIT_SUCCESS;
 }
