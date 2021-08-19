@@ -30,6 +30,18 @@ void drawMenu()
 
     SDL_RenderPresent(screenRender);
 }
+
+void drawEnd(int status)
+{
+    // clear();
+    // clearPlayer();
+
+    SDL_RenderClear(screenRender);
+    
+    ScreenEnd(status);
+
+    SDL_RenderPresent(screenRender);
+}
 // Fonction de fin de jeu
 void endGame() {
     clear();

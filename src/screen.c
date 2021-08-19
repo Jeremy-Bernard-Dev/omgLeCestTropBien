@@ -6,6 +6,10 @@ SDL_Surface *tileset = NULL;
 SDL_Texture *texture = NULL;
 SDL_Surface *menu = NULL;
 SDL_Texture *menutexture = NULL;
+SDL_Surface *win = NULL;
+SDL_Texture *wintexture = NULL;
+SDL_Surface *lose = NULL;
+SDL_Texture *losetexture = NULL;
 SDL_Color color = {105, 105, 105, 128};
 
 void Createwindow()
@@ -25,6 +29,21 @@ void ScreenMenu()
     menutexture = SDL_CreateTextureFromSurface(screen, menu);
 
 	SDL_RenderCopy(screen, menutexture, NULL, NULL);
+}
+
+void ScreenEnd(int status)
+{
+    if (status == 1) {
+        win = IMG_Load("img/win.jpg");
+        wintexture = SDL_CreateTextureFromSurface(screen, win);
+
+        SDL_RenderCopy(screen, wintexture, NULL, NULL);
+    } else if (status == 2) {
+        lose = IMG_Load("img/lose.jpg");
+        losetexture = SDL_CreateTextureFromSurface(screen, lose);
+
+        SDL_RenderCopy(screen, losetexture, NULL, NULL);
+    }
 }
 
 SDL_Renderer *getscreen()

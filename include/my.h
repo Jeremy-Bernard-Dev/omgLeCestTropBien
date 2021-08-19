@@ -29,6 +29,8 @@ void init();
 void draw(int playernbr);
 void intBallDir(int player);
 void drawMenu();
+void drawEnd(int status);
+void ScreenEnd(int status);
 int game(int idpPlayer, SOCKET socket);
 void clear();
 void Createwindow();

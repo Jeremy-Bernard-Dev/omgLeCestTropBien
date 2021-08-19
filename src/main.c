@@ -55,6 +55,7 @@ int game(int idpPlayer, SOCKET socket) {
     int timer = 0;
     // char buffer[32] = "OK \n";
     char rbuff[32];
+    bool game = true;
 
     while (!quit)
     {
@@ -82,38 +83,35 @@ int game(int idpPlayer, SOCKET socket) {
                         move(idpPlayer, BAS);
                         send(socket, "B", 32, 0);
                         break;
-
-                        // case SDLK_LEFT :
-                        // move(2, HAUT);
-                        // break;
-
-                        // case SDLK_RIGHT :
-                        // move(2, BAS);
-                        // break;
                     }
                 break;
             }
         }
-        if (timer < 100) {
-            timer ++;
-        } else {
-            timer = 0;
-            moveBalle();
-        }
-        if(recv(socket, rbuff, 32, 0) != SOCKET_ERROR)
-        {
-            // puts(rbuff);
-            if (strcmp(rbuff , "H") == 0) {
-                move(2, HAUT);
-            } else if (strcmp(rbuff , "B") == 0) {
-                move(2, BAS);
+        if (game) {
+            if (timer < 100) {
+                timer ++;
+            } else {
+                timer = 0;
+                moveBalle();
             }
+            if(recv(socket, rbuff, 32, 0) != SOCKET_ERROR)
+            {
+                if (strcmp(rbuff , "H") == 0) {
+                    move(2, HAUT);
+                } else if (strcmp(rbuff , "B") == 0) {
+                    move(2, BAS);
+                }
+            }
+            draw(2);
         }
-        draw(2);
         int point1 = getPoint(1);
         int point2 = getPoint(2);
-        if (point1 == 3 || point2 == 3) {
-            endGame();
+        if (point1 == 3) {
+            drawEnd(1);
+            game = false;
+        } else if (point2 == 3) {
+            game = false;
+            drawEnd(2);
         }
     }
     endGame();

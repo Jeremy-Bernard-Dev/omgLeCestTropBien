@@ -6,6 +6,7 @@ int directionV = BAS;
 int scoreP1 = 0;
 int scoreP2 = 0;
 
+
 // Initialisation de la position des joueurs et de la Balle
 void initPlayerSprites(SDL_Renderer *screen)
 {
@@ -20,14 +21,14 @@ void initPlayerSprites(SDL_Renderer *screen)
 
     player2 = IMG_Load("img/Player.png");
     player2texture = SDL_CreateTextureFromSurface(screen, player2);
-    P2Pos.x = 300;
+    P2Pos.x = 310;
     P2Pos.y = 100;
     P2Pos.w = 10;
     P2Pos.h = 100;
 
     balle = IMG_Load("img/Balle.png");
     balletexture = SDL_CreateTextureFromSurface(screen, balle);
-    BallPos.x = 150;
+    BallPos.x = 170;
     BallPos.y = 150;
     BallPos.w = 20;
     BallPos.h = 20;
@@ -88,7 +89,7 @@ void move(int player, int direction) {
 // Réinitialiser la position de la balle au milieu de l'écran
 void resetBall() {
     SDL_Rect *position = &BallPos;
-    position->x = 200;
+    position->x = 170;
     position->y = 150;
     if (directionH == DROITE) {
         directionH = GAUCHE;
@@ -113,13 +114,13 @@ void moveBalle() {
     switch (directionH)
     {
         case DROITE:
-        if (position->x < 345) {
+        if (position->x < 340) {
             position->x +=3;
         } else {
             resetBall();
             scoreP1 ++;
         }
-        if (position->x >= p2pos->x - 10) {
+        if (position->x >= p2pos->x - 20) {
             if (position->y >= p2pos->y - 20 && position->y <= p2pos->y + 99) {
                 directionH = GAUCHE;
             }
