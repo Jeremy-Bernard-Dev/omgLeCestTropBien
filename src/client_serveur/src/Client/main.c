@@ -24,12 +24,11 @@ int client(int Port, char *Ip)
 
         if (gametrue == false) {
             printf("ok2");
-            // game(atoi(rbuff));
+            intBallDir(2); 
             game(1, sock);
             gametrue = true;
         }
         // while (1) {
-        //     printf("ok2");
         // if(recv(sock, rbuff, 32, 0) != SOCKET_ERROR)
         // {
         //     puts(rbuff);

@@ -21,7 +21,7 @@ void draw(int playernbr)
 
     SDL_RenderPresent(screenRender);
 }
-
+// Dessiner le menu
 void drawMenu()
 {
     SDL_RenderClear(screenRender);
@@ -30,7 +30,7 @@ void drawMenu()
 
     SDL_RenderPresent(screenRender);
 }
-
+// Fonction de fin de jeu
 void endGame() {
     clear();
     SDL_Quit();

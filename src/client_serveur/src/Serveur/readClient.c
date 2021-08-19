@@ -14,9 +14,9 @@ int readClient(int client, int playernbr)
         return 1;
     }
 
-    n = 0;
     memset(buff, '\0', 128);
-    if ((n = recv(client, buff, 128, 0)) >= 0)
+    n = recv(client, buff, 128, 0);
+    if (n >= 0)
     {
         send(client,str, 10, 0);
 

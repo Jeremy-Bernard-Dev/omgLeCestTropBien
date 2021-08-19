@@ -27,6 +27,7 @@ typedef int SOCKET;
 
 void init();
 void draw(int playernbr);
+void intBallDir(int player);
 void drawMenu();
 int game(int idpPlayer, SOCKET socket);
 void clear();

@@ -4,12 +4,12 @@
 #include <sys/socket.h>
 
 int main() {
-    //déclaration var
+    // Déclaration des Variables
     int port = 4444;
     char *clients = "127.0.0.1";
     bool Menu = true;
     SDL_Event event;
-    //initilisation des ressources
+    // Initilisation des ressources
     init();
  
     while (Menu == true) {
@@ -24,19 +24,18 @@ int main() {
                 printf("Trying to host\n");
                 serveur(port);
                 printf("Host ok");
-                // client(port, clients);
+                // Client(port, clients);
 
-                //game(1,1);
-                //printf("ok4");
+                // Game(1,1);
                 Menu = false;
-                // game(1);
+                // Game(1);
                 break;
 
                 case SDLK_KP_2 :
                 printf("Trying to join the game\n");
                 client(port, clients);
                 Menu = false;
-                // game(1);
+                // Game(1);
                 break;
 
                 case SDLK_KP_3 :
@@ -49,7 +48,7 @@ int main() {
     
     return 0;
 }
-
+// Fonction de jeu principale
 int game(int idpPlayer, SOCKET socket) {
     bool quit = false;
     bool first = true;
@@ -61,7 +60,7 @@ int game(int idpPlayer, SOCKET socket) {
     {
         if (first == true)
         {
-            send(socket, "ok", 32, 0);
+            send(socket, "N", 32, 0);
             // first = false;
         }
         while (SDL_PollEvent(&event)) {
@@ -76,12 +75,12 @@ int game(int idpPlayer, SOCKET socket) {
                         
                         case SDLK_UP :
                         move(idpPlayer, HAUT);
-                        send(socket, "HAUT", 32, 0);
+                        send(socket, "H", 32, 0);
                         break;
 
                         case SDLK_DOWN :
                         move(idpPlayer, BAS);
-                        send(socket, "BAS", 32, 0);
+                        send(socket, "B", 32, 0);
                         break;
 
                         // case SDLK_LEFT :
@@ -103,12 +102,12 @@ int game(int idpPlayer, SOCKET socket) {
         }
         if(recv(socket, rbuff, 32, 0) != SOCKET_ERROR)
         {
-            puts(rbuff);
-            // if ("HAUT" == rbuff) {
-            //     move(2, HAUT);
-            // } else if (rbuff == "BAS") {
-            //     move(2, BAS);
-            // }
+            // puts(rbuff);
+            if (strcmp(rbuff , "H") == 0) {
+                move(2, HAUT);
+            } else if (strcmp(rbuff , "B") == 0) {
+                move(2, BAS);
+            }
         }
         draw(2);
         int point1 = getPoint(1);

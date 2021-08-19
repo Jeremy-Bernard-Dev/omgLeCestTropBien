@@ -6,16 +6,19 @@ int directionV = BAS;
 int scoreP1 = 0;
 int scoreP2 = 0;
 
+// Initialisation de la position des joueurs et de la Balle
 void initPlayerSprites(SDL_Renderer *screen)
 {
-    player1 = IMG_Load("img/Player1.png");
+    // Image du joueur
+    player1 = IMG_Load("img/Player.png");
     player1texture = SDL_CreateTextureFromSurface(screen, player1);
+    // Position + dimension
     P1Pos.x = 40;
     P1Pos.y = 100;
     P1Pos.w = 10;
     P1Pos.h = 100;
 
-    player2 = IMG_Load("img/Player2.png");
+    player2 = IMG_Load("img/Player.png");
     player2texture = SDL_CreateTextureFromSurface(screen, player2);
     P2Pos.x = 300;
     P2Pos.y = 100;
@@ -30,6 +33,16 @@ void initPlayerSprites(SDL_Renderer *screen)
     BallPos.h = 20;
 }
 
+void intBallDir(int player)
+{
+    if (player == 1) {
+        directionH = DROITE;
+    } else if (player == 2) {
+        directionH = GAUCHE;
+    }
+}
+
+// Dessiner les joueurs et la balle
 void drawPlayer(SDL_Renderer *screen, int playernbr)
 {
     switch (playernbr)
@@ -48,6 +61,7 @@ void drawPlayer(SDL_Renderer *screen, int playernbr)
 
 }
 
+// Fonction de mouvement
 void move(int player, int direction) {
     SDL_Rect *position = NULL;
     if (player == 1) 
@@ -71,7 +85,7 @@ void move(int player, int direction) {
         break;
     }
 }
-
+// Réinitialiser la position de la balle au milieu de l'écran
 void resetBall() {
     SDL_Rect *position = &BallPos;
     position->x = 200;
@@ -91,6 +105,7 @@ int getPoint(int player) {
     }
 }
 
+// Mouvement de la balle
 void moveBalle() {
     SDL_Rect *position = &BallPos;
     SDL_Rect *p1pos = &P1Pos;
